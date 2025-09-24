@@ -73,20 +73,24 @@ h6 {
 	line-height: 1.2;
 }
 h1 {
-	font-size: 3.052em;
+	font-size: 2.5rem;
 }
 h2 {
-	font-size: 2.441em;
+	font-size: 2.25rem;
 }
 h3 {
-	font-size: 1.953em;
+	font-size: 2rem;
 }
 h4 {
-	font-size: 1.563em;
+	font-size: 1.5rem;
 }
 h5 {
-	font-size: 1.25em;
+	font-size: 1.25rem;
 }
+h6 {
+	font-size: 1rem;
+}
+
 strong,
 b {
 	font-weight: 700;
@@ -98,10 +102,10 @@ a:hover {
 	color: var(--accent);
 }
 p {
-	margin-bottom: 1em;
+	margin-bottom: 1rem;
 }
 .prose p {
-	margin-bottom: 2em;
+	margin-bottom: 2rem;
 }
 textarea {
 	width: 100%;
@@ -120,11 +124,11 @@ img {
 }
 code {
 	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
+	background-color: var(--code-bg-color);
 	border-radius: 2px;
 }
 pre {
-	padding: 1.5em;
+	padding: 1.5rem;
 	border-radius: 8px;
 }
 pre > code {
@@ -134,7 +138,7 @@ blockquote {
 	border-left: 4px solid var(--accent);
 	padding: 0 0 0 20px;
 	margin: 0px;
-	font-size: 1.333em;
+	font-size: 1.333rem;
 }
 hr {
 	border: none;
@@ -145,7 +149,7 @@ hr {
 		font-size: 18px;
 	}
 	main {
-		padding: 1em;
+		padding: 1rem;
 	}
 }
 
