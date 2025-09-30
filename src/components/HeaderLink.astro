@@ -1,15 +1,36 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-type Props = HTMLAttributes<'a'>;
+// hrefの型を明示的にstringに絞り込む（propsはstringかURL、またはundefined/nullの可能性があるため）
+type AnchorProps = HTMLAttributes<'a'> & {
+    href: string; // hrefが必須かつstringであることを明示
+};
 
-const { href, class: className, ...props } = Astro.props;
-const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
-const subpath = pathname.match(/[^\/]+/g);
-const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
+const { href: rawHref, class: className, ...props } = Astro.props as AnchorProps;
+
+// 1. URLをクリーンアップし、string型として保証する
+const href = rawHref.toString().replace(/\/$/, ''); // URL型の場合はtoString()でstringに変換し、末尾スラッシュを削除
+
+// 2. BASE_URLを適用し、最終的なリンクを決定
+// 外部URL(http/https)やアンカー(#)ではない場合にのみ、BASE_URLを結合する
+const isExternalOrAnchor = href.startsWith('http') || href.startsWith('#');
+
+// BASE_URLは末尾に/が付いているため、hrefがルート'/'でない場合はそのスラッシュを一旦削除して結合する
+const finalHref = (href === '' || isExternalOrAnchor)
+    ? href // ルート('')、または外部・アンカーリンクはそのまま
+    : import.meta.env.BASE_URL.replace(/\/$/, '') + (href.startsWith('/') ? href : '/' + href);
+
+// 3. アクティブ判定のためのURL正規化
+const pathname = Astro.url.pathname;
+
+// trailingSlash: 'always'の設定に基づき、両方のURLにスラッシュを付与
+const normalizedFinalHref = finalHref.endsWith('/') ? finalHref : finalHref + '/';
+const normalizedPathname = pathname.endsWith('/') ? pathname : pathname + '/';
+
+// 最終的なアクティブ判定
+const isActive = normalizedFinalHref === normalizedPathname;
 ---
 
-<a href={href} class:list={[className, { 'gradient-text': isActive }]} {...props}>
-	<slot />
+<a href={normalizedFinalHref} class:list={[className, { 'gradient-text': isActive }]} {...props}>
+ <slot />
 </a>
-
