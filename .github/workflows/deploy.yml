@@ -35,6 +35,10 @@ jobs:
       # 4. Astroのビルドを実行
       - name: Build Astro site
         run: npm run build
+
+      # 4.5. GitHub PagesのJekyll処理を無効化する
+      - name: Disable Jekyll
+        run: touch dist/.nojekyll
       
       # 5. デプロイ設定
       - name: Setup Pages
