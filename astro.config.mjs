@@ -11,8 +11,8 @@ export default defineConfig({
     site: 'https://example.com',
     
     // ↓↓↓↓↓↓↓ この行を追加・修正します ↓↓↓↓↓↓↓
-    base: '/my-blog/', // ここをあなたのリポジトリ名に置き換えてください。スラッシュを忘れずに！
-    // ↑↑↑↑↑↑↑ この行を追加・修正します ↑↑↑↑↑↑↑
+    base: '/my-blog/',
+    trailingSlash: 'always',
     
     integrations: [mdx(), sitemap(), icon()],
 });
