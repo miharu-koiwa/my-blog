@@ -1,0 +1,53 @@
+# Astroをビルドし、GitHub Pagesにデプロイするためのワークフロー
+name: Deploy Astro Project to GitHub Pages
+
+on:
+  # master/mainブランチにプッシュがあった時に実行
+  push:
+    branches: ["master", "main"] 
+  # Actionsタブから手動実行できるようにする
+  workflow_dispatch:
+
+# 権限設定：ページの書き込みとActionsの読み取りを許可
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. コードをチェックアウト
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Node.js環境のセットアップ (Astroに必要な環境)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # 3. 依存関係のインストール
+      - name: Install dependencies
+        run: npm install
+      
+      # 4. Astroのビルドを実行
+      - name: Build Astro site
+        run: npm run build
+      
+      # 5. デプロイ設定
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 6. ビルド成果物をアップロード
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Astroのデフォルトの出力ディレクトリ
+          path: './dist' 
+
+      # 7. GitHub Pagesへのデプロイ
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
