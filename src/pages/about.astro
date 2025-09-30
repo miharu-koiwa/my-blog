@@ -2,8 +2,10 @@
 import Layout from '../layouts/Layout.astro'
 import Timeline from '../components/about/Timeline.astro'
 import { SITE_TITLE, SITE_DESCRIPTION, JOB_TITLE } from '../consts'
+//画像ファイルをインポート//
+import profileImage from '../assets/profile.jpg' 
 
-const myName = '小岩 美晴 - Miharu Koiwa'
+const myName = 'Miharu Koiwa'
 ---
 
 <Layout title={`About - ${SITE_TITLE}`} description={SITE_DESCRIPTION}>
@@ -11,7 +13,7 @@ const myName = '小岩 美晴 - Miharu Koiwa'
     <h1 class='gradient-text page-title'>About</h1>
 
     <div class='profile'>
-      <img src={`${import.meta.env.BASE_URL}/blog-placeholder-about.jpg`} alt={myName} class='profile-image' />
+      <img src={profileImage.src} alt={myName} class='profile-image' />
       <div class='profile-info'>
         <h2>{myName}</h2>
         <p class='job-title'>{JOB_TITLE}</p>
@@ -20,44 +22,38 @@ const myName = '小岩 美晴 - Miharu Koiwa'
 
     <section class='introduction'>
       <h3>プロフィール</h3>
-      <p>1991年11月18日生まれ、石川県出身。</p>
+      <p>石川県出身、現在は愛知県に住んでいます。</p>
       <p>
         社内DX化の仕事に従事しながら、Web エンジニアになるため学習中。
-        <br />
-        説明
       </p>
     </section>
 
     <section class='experience'>
       <h3>経歴</h3>
 
-      <Timeline date='20XX年 - 現在' title='タイトル'>
+      <Timeline date='2024年 - 現在' title='技術者派遣会社'>
         <p>
-          説明
-          <br />
-          説明2
+          生活インフラを支える会社に配属され、社内のＤＸ化を推進やそのほか社内業務に従事
         </p>
         <ul>
-          <li>仕事内容</li>
-          <li>仕事内容</li>
-          <li>仕事内容</li>
+          <li>電子申請の推進</li>
+          <li>公式ホームページの運用</li>
         </ul>
         <p>など</p>
       </Timeline>
 
-      <Timeline date='20XX - 20XX年' title='タイトル'>
+      <Timeline date='2017 - 2024年' title='貿易事務'>
         <p>
-          説明
+          英語を使った仕事がしたくて、物流会社に就職
         </p>
+        <ul>
+          <li>輸出入の書類作成</li>
+          <li>海外代理店との調整</li>
+          <li>輸出入貨物の国内輸送の調整</li>
+        </ul>
+        <p>など</p>
       </Timeline>
 
-      <Timeline date='20XX - 20XX年' title='タイトル'>
-        <p>説明</p>
-      </Timeline>
-
-      <Timeline date='20XX - 20XX年' title='タイトル'>
-        <p>説明</p>
-      </Timeline>
     </section>
   </main>
 </Layout>
