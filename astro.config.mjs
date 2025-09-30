@@ -13,6 +13,7 @@ export default defineConfig({
     // ↓↓↓↓↓↓↓ この行を追加・修正します ↓↓↓↓↓↓↓
     base: '/my-blog/',
     trailingSlash: 'always',
+    output: 'static',
     
     integrations: [mdx(), sitemap(), icon()],
 });
