@@ -1,15 +1,18 @@
-// astro.config.mjs
+// @ts-check
 
+import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 
-// リポジトリ名に変えてください
-const REPO_NAME = '/my-blog/'; // 必ずスラッシュで囲むこと
+import icon from 'astro-icon';
 
+// https://astro.build/config
 export default defineConfig({
-  // ↓↓↓↓↓↓↓ この行を追加・修正します ↓↓↓↓↓↓↓
-  base: REPO_NAME,
-  // ↑↑↑↑↑↑↑ この行を追加・修正します ↑↑↑↑↑↑↑
-  
-  // 他の既存の設定（pluginsなど）はそのままでOK
-  // ...
+    site: 'https://example.com',
+    
+    // ↓↓↓↓↓↓↓ この行を追加・修正します ↓↓↓↓↓↓↓
+    base: '/my-blog/', // ここをあなたのリポジトリ名に置き換えてください。スラッシュを忘れずに！
+    // ↑↑↑↑↑↑↑ この行を追加・修正します ↑↑↑↑↑↑↑
+    
+    integrations: [mdx(), sitemap(), icon()],
 });
